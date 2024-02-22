@@ -3,7 +3,6 @@ import { getUserByClerkId } from '@/utils/auth'
 import { prisma } from '@/utils/db'
 import EntryCard from '@/components/EntryCard'
 import NewEntryCard from '@/components/NewEntryCard'
-import { analyzeEntry } from '@/utils/ai'
 
 const getEntries = async () => {
   const user = await getUserByClerkId()
@@ -15,16 +14,6 @@ const getEntries = async () => {
       createdAt: 'desc',
     },
   })
-
-  // analyze(`I'm going to give you a journal entry. I want you to analyze it for a few things. I need the mood, a summary, what the subject is,
-  // if the entry is negative and a color representing the mood. You need to respond back in JSON format with the following
-  // keys: mood, summary, subject, color, negative.
-  //  entry: Today was a really good day. I finally was able to finish revamping my resume.
-  //  `)
-
-  // analyzeEntry(
-  //   'Today was an okay day. I found a really good new coffee place but then I got a flat tire. :)'
-  // )
 
   return entries
 }

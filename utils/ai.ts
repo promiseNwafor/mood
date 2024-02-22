@@ -14,16 +14,11 @@ const parser = StructuredOutputParser.fromZodSchema(
       .describe(
         'is the journal entry negative? (i.e. does it contain negative emotions?).'
       ),
-    summary: z.string().describe('quick summary of the entire entry.'),
+    summary: z.string().describe('quick short summary of the entry.'),
     color: z
       .string()
       .describe(
         'a hexidecimal color code that represents the mood of the entry. Example #0101fe for blue representing happiness.'
-      ),
-    sentimentScore: z
-      .number()
-      .describe(
-        'sentiment of the text and rated on a scale from -10 to 10, where -10 is extremely negative, 0 is neutral, and 10 is extremely positive.'
       ),
   })
 )
@@ -42,7 +37,6 @@ const getPrompt = async (content: string) => {
     entry: content,
   })
 
-  console.log('++++++++++++++', input)
   return input
 }
 
@@ -54,5 +48,9 @@ export const analyzeEntry = async (prompt: string) => {
   })
   const result = await model.call(input)
 
-  console.log('++++++++++++++', result)
+  try {
+    return parser.parse(result)
+  } catch (error) {
+    console.error(error)
+  }
 }
