@@ -70,7 +70,7 @@ const Editor: React.FC<IEditor> = ({ entry }) => {
                 className="space-x-4 px-2 py-4 flex items-center justify-between border-b border-t border-black/10"
               >
                 <span className="text-lg font-semibold">{item.name}</span>
-                <span className="truncate">{`${item.value}`}</span>
+                <span>{`${item.value}`}</span>
               </li>
             ))}
           </ul>
