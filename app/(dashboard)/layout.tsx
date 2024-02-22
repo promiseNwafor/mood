@@ -7,6 +7,7 @@ interface IDashboardLayout {
 }
 
 const links = [
+  { name: 'Home', href: '/' },
   { name: 'Journals', href: '/journal' },
   { name: 'History', href: '/history' },
 ]
